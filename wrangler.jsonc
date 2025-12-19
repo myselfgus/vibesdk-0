@@ -144,7 +144,7 @@
         "ALLOWED_EMAIL": "1@voither.com",
         "DISPATCH_NAMESPACE": "vibesdk-default-namespace",
         "ENABLE_READ_REPLICAS": "true",
-        "CLOUDFLARE_AI_GATEWAY": "https://gateway.ai.cloudflare.com /v1/1a481f7cdb7027c30174a692c89cbda1/voither/compat",
+        "CLOUDFLARE_AI_GATEWAY": "https://gateway.ai.cloudflare.com/v1/1a481f7cdb7027c30174a692c89cbda1/voither/compat",
         "CUSTOM_DOMAIN": "build.voither.com",
         "MAX_SANDBOX_INSTANCES": "4",
         "SANDBOX_INSTANCE_TYPE": "standard-4",
