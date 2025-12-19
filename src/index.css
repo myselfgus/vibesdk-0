@@ -6,17 +6,17 @@
   src:  url('./assets/fonts/DepartureMono-Regular.woff') 
 }
 
-/* Subtle chat edge throb effect */
+/* Subtle chat edge throb effect - Health Teal */
 @keyframes chat-edge-throb {
   0%, 100% {
     box-shadow:
-      0 0 0 0 rgba(246, 130, 31, 0.10),
-      inset 0 0 0 1px rgba(246, 130, 31, 0.16);
+      0 0 0 0 rgba(0, 168, 150, 0.10),
+      inset 0 0 0 1px rgba(0, 168, 150, 0.16);
   }
   50% {
     box-shadow:
-      0 0 0 6px rgba(255, 61, 0, 0.08),
-      inset 0 0 0 2px rgba(255, 61, 0, 0.22);
+      0 0 0 6px rgba(0, 184, 165, 0.08),
+      inset 0 0 0 2px rgba(0, 184, 165, 0.22);
   }
 }
 
@@ -149,66 +149,65 @@
 	--radius:
 		0.625rem;
 	--destructive:
-		oklch(0.577 0.245 27.325);
+		#C44536;
 	--border:
-		oklch(0.922 0 0);
+		rgba(255, 255, 255, 0.5);
 	--input:
-		oklch(0.922 0 0);
+		#F4F4F2;
 	--ring:
-		oklch(0.708 0 0);
-	--build-accent-color: #ff3d00;
-	--build-chat-colors-bg-1: #e7e7e7;
-	--build-chat-colors-bg-2: #f6f6f6;
-	--build-chat-colors-bg-3: #fbfbfc;
-	--build-chat-colors-bg-4: #ffffff;
-	--build-chat-colors-border-primary: #e5e5e5;
-	--build-chat-colors-border-secondary: #eeeeee;
-	--build-chat-colors-border-tertiary: #eeeeee;
-	--build-chat-colors-danger: #950000cc;
-	--build-chat-colors-brand-heavy: #f6821f;
-	--build-chat-colors-brand-primary: #f6821f;
-	--build-chat-colors-brand-subtle: #f6821f;
+		#00A896;
+	--build-accent-color: #00A896;
+	--build-chat-colors-bg-1: #ECECEA;
+	--build-chat-colors-bg-2: #F2F2EE;
+	--build-chat-colors-bg-3: #F8F8F6;
+	--build-chat-colors-bg-4: #FFFFFF;
+	--build-chat-colors-border-primary: rgba(255, 255, 255, 0.5);
+	--build-chat-colors-border-secondary: rgba(255, 255, 255, 0.4);
+	--build-chat-colors-border-tertiary: rgba(0, 0, 0, 0.06);
+	--build-chat-colors-danger: #C44536;
+	--build-chat-colors-brand-heavy: #009688;
+	--build-chat-colors-brand-primary: #00A896;
+	--build-chat-colors-brand-subtle: #00B8A5;
 	--build-chat-colors-text-inverted: #ffffff;
-	--build-chat-colors-text-primary: #0a0a0a;
-	--build-chat-colors-text-secondary: #171717;
-	--build-chat-colors-text-tertiary: #21212199;
+	--build-chat-colors-text-primary: #1A1A18;
+	--build-chat-colors-text-secondary: #1A1A18;
+	--build-chat-colors-text-tertiary: #6B6B66;
 }
 
 .dark {
 	--destructive:
-		#ef4444; /* Error red */
+		#C44536;
 	--border:
-		#393939; /* Primary border color */
+		rgba(255, 255, 255, 0.1);
 	--input:
-		#292929; /* Input background */
+		#2A2A28;
+	--ring:
+		#00A896;
 
-	--build-chat-colors-bg-1: #151515;
-	--build-chat-colors-bg-2: #1f2020;
-	--build-chat-colors-bg-3: #292929;
-	--build-chat-colors-bg-4: #3c3c3c;
-	--build-chat-colors-border-primary: #393939;
-	--build-chat-colors-border-secondary: #454746;
-	--build-chat-colors-border-tertiary: #454746;
-	--build-chat-colors-brand-heavy: #f6821f;
-	--build-chat-colors-brand-primary: #f6821f;
-	--build-chat-colors-brand-subtle: #f6821f;
-	--build-chat-colors-text-inverted: #000000;
-	--build-chat-colors-text-primary: #ffffff;
-	--build-chat-colors-text-secondary: #cdcaca;
-	--build-chat-colors-text-tertiary: #bcb9b9;
+	--build-chat-colors-bg-1: #1A1A18;
+	--build-chat-colors-bg-2: #222220;
+	--build-chat-colors-bg-3: #2A2A28;
+	--build-chat-colors-bg-4: #3A3A38;
+	--build-chat-colors-border-primary: rgba(255, 255, 255, 0.1);
+	--build-chat-colors-border-secondary: rgba(255, 255, 255, 0.08);
+	--build-chat-colors-border-tertiary: rgba(255, 255, 255, 0.05);
+	--build-chat-colors-danger: #C44536;
+	--build-chat-colors-brand-heavy: #00B8A5;
+	--build-chat-colors-brand-primary: #00A896;
+	--build-chat-colors-brand-subtle: #009688;
+	--build-chat-colors-text-inverted: #1A1A18;
+	--build-chat-colors-text-primary: #F8F8F6;
+	--build-chat-colors-text-secondary: #E0E0DE;
+	--build-chat-colors-text-tertiary: #9A9A96;
 
 	--shadow-dialog:
-		0px 18px 60px 0px rgba(6, 6, 5, 0.1),
-		3px 3px 13px 0px rgba(0, 0, 0, 0.04), -3px 3px 13px 0px rgba(0, 0, 0, 0.04),
-		24px 24px 24px 0px rgba(0, 0, 0, 0.03),
-		-24px 24px 24px 0px rgba(0, 0, 0, 0.03),
-		53px 53px 32px 0px rgba(0, 0, 0, 0.02),
-		0px 0px 0px 1px rgba(217, 217, 217, 0.2);
+		0px 18px 60px 0px rgba(0, 0, 0, 0.3),
+		3px 3px 13px 0px rgba(0, 0, 0, 0.2),
+		0px 0px 0px 1px rgba(255, 255, 255, 0.05);
 	--shadow-elevation:
-		6px 6px 13px 0px rgba(0, 0, 0, 0.2),
-		24px 24px 24px 0px rgba(0, 0, 0, 0.17),
-		53px 53px 32px 0px rgba(0, 0, 0, 0.12),
-		0px 0px 0px 1px rgba(217, 217, 217, 0.1);
+		6px 6px 13px 0px rgba(0, 0, 0, 0.3),
+		24px 24px 24px 0px rgba(0, 0, 0, 0.25),
+		0px 0px 0px 1px rgba(255, 255, 255, 0.05);
 }
 
 @layer base {
@@ -216,7 +215,18 @@
 		@apply border-border-primary outline-ring/50;
 	}
   	body {
-    	@apply bg-bg-3 text-text-primary h-full;
+    	@apply bg-health-bg text-health-dark font-sans font-light antialiased h-full;
+		background: linear-gradient(180deg, #F8F8F6 0%, #F2F2EE 100%);
+		min-height: 100vh;
+	}
+	.dark body {
+		background: linear-gradient(180deg, #2A2A28 0%, #1A1A18 100%);
+	}
+	h1, h2, h3, h4, h5, h6 {
+		@apply font-serif font-normal;
+	}
+	strong, b {
+		@apply font-medium;
 	}
 	button {
 		@apply cursor-pointer;
