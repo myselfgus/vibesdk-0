@@ -291,7 +291,11 @@
 	.neu-card {
 		background: linear-gradient(145deg, #FFFFFF, #ECECEA);
 		box-shadow: 12px 12px 24px rgba(0,0,0,0.06), -12px -12px 24px rgba(255,255,255,0.95);
-		@apply rounded-24px border border-white/50 transition-all duration-300 ease-out;
+		@apply rounded-24px border border-white/60 transition-all duration-300 ease-out;
+	}
+	.neu-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 16px 16px 32px rgba(0,0,0,0.08), -12px -12px 24px rgba(255,255,255,0.95);
 	}
 
 	.neu-card-soft {
@@ -303,25 +307,57 @@
 	.neu-inset {
 		background: #F4F4F2;
 		box-shadow: inset 4px 4px 12px rgba(0,0,0,0.04), inset -4px -4px 12px rgba(255,255,255,0.7);
-		@apply rounded-2xl border border-transparent focus:border-health-teal/30 focus:outline-none transition-colors duration-300;
+		@apply rounded-2xl border border-transparent transition-all duration-200;
+	}
+	.neu-inset:focus-within {
+		background: #FFFFFF;
+		border-color: transparent;
 	}
 
 	.neu-btn {
 		background: linear-gradient(145deg, #00B8A5, #009688);
 		box-shadow: 6px 6px 16px rgba(0,168,150,0.3), -2px -2px 8px rgba(255,255,255,0.1);
-		@apply text-white font-sans tracking-wide transition-all active:scale-95 duration-200 rounded-xl px-6 py-3 font-medium;
+		@apply text-white font-sans tracking-wide transition-all duration-200 rounded-xl px-6 py-3 font-medium border-none cursor-pointer;
+	}
+	.neu-btn:hover {
+		filter: brightness(1.05);
+		transform: translateY(-1px);
+	}
+	.neu-btn:active {
+		transform: scale(0.97);
+		box-shadow: inset 2px 2px 8px rgba(0,0,0,0.1);
 	}
 
 	.neu-btn-secondary {
 		background: linear-gradient(145deg, #FFFFFF, #ECECEA);
 		box-shadow: 6px 6px 16px rgba(0,0,0,0.05), -2px -2px 8px rgba(255,255,255,0.8);
-		@apply text-health-dark font-sans tracking-wide transition-all active:scale-95 duration-200 rounded-xl px-6 py-3 font-medium;
+		@apply text-health-dark font-sans tracking-wide transition-all duration-200 rounded-xl px-6 py-3 font-medium border border-transparent cursor-pointer;
+	}
+	.neu-btn-secondary:hover {
+		border-color: rgba(0,0,0,0.05);
+		transform: translateY(-1px);
+	}
+	.neu-btn-secondary:active {
+		transform: scale(0.97);
+		background: #ECECEA;
+	}
+
+	.neu-btn-ghost {
+		@apply bg-transparent text-health-text-sub rounded-xl transition-all duration-200 border-none cursor-pointer;
+	}
+	.neu-btn-ghost:hover {
+		background: rgba(0,0,0,0.05);
+		@apply text-health-dark;
 	}
 
 	.neu-icon-btn {
 		background: linear-gradient(145deg, #FFFFFF, #ECECEA);
 		box-shadow: 5px 5px 10px rgba(0,0,0,0.05), -5px -5px 10px rgba(255,255,255,0.8);
-		@apply flex items-center justify-center rounded-xl text-health-dark transition-all active:scale-95 active:shadow-inner w-10 h-10;
+		@apply flex items-center justify-center rounded-xl text-health-dark transition-all duration-200 w-10 h-10 border-none cursor-pointer;
+	}
+	.neu-icon-btn:active {
+		transform: scale(0.95);
+		box-shadow: inset 2px 2px 6px rgba(0,0,0,0.05);
 	}
 }
 

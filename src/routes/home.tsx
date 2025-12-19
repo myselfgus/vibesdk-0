@@ -134,35 +134,8 @@ export default function Home() {
 
 	return (
 		<div className="relative flex flex-col items-center size-full">
-			{/* Dotted background pattern - extends to full viewport */}
-			<div className="fixed inset-0 text-accent z-0 opacity-20 pointer-events-none">
-				<svg width="100%" height="100%">
-					<defs>
-						<pattern
-							id=":S2:"
-							viewBox="-6 -6 12 12"
-							patternUnits="userSpaceOnUse"
-							width="12"
-							height="12"
-						>
-							<circle
-								cx="0"
-								cy="0"
-								r="1"
-								fill="currentColor"
-							></circle>
-						</pattern>
-					</defs>
-					<rect
-						width="100%"
-						height="100%"
-						fill="url(#:S2:)"
-					></rect>
-				</svg>
-			</div>
-			
 			<LayoutGroup>
-				<div className="rounded-md w-full max-w-2xl overflow-hidden">
+				<div className="w-full max-w-2xl overflow-hidden">
 					<motion.div
 						layout
 						transition={{ layout: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } }}
@@ -170,9 +143,6 @@ export default function Home() {
 							"px-6 p-8 flex flex-col items-center z-10",
 							discoverReady ? "mt-48" : "mt-[20vh] sm:mt-[24vh] md:mt-[28vh]"
 						)}>
-						<h1 className="text-shadow-sm text-shadow-red-200 dark:text-shadow-red-900 text-accent font-medium leading-[1.1] tracking-tight text-5xl w-full mb-4 bg-clip-text bg-gradient-to-r from-text-primary to-text-primary/90">
-							What should we build today?
-						</h1>
 
 						<form
 							method="POST"
@@ -181,22 +151,22 @@ export default function Home() {
 								const query = textareaRef.current!.value;
 								handleCreateApp(query, agentMode);
 							}}
-							className="flex z-10 flex-col w-full min-h-[150px] bg-bg-4 border border-accent/30 dark:border-accent/50 dark:bg-bg-2 rounded-[18px] shadow-textarea p-5 transition-all duration-200"
+							className="neu-card flex z-10 flex-col w-full min-h-[150px] p-6 hover:translate-y-0"
 						>
-							<div 
+							<div
 								className={clsx(
 									"flex-1 flex flex-col relative",
-									isDragging && "ring-2 ring-accent ring-offset-2 rounded-lg"
+									isDragging && "ring-2 ring-health-teal/30 ring-offset-2 rounded-xl"
 								)}
 								{...dragHandlers}
 							>
 								{isDragging && (
-									<div className="absolute inset-0 flex items-center justify-center bg-accent/10 backdrop-blur-sm rounded-lg z-30 pointer-events-none">
-										<p className="text-accent font-medium">Drop images here</p>
+									<div className="absolute inset-0 flex items-center justify-center bg-health-teal/5 backdrop-blur-sm rounded-xl z-30 pointer-events-none">
+										<p className="text-health-teal font-medium">Drop images here</p>
 									</div>
 								)}
 								<textarea
-									className="w-full resize-none ring-0 z-20 outline-0 placeholder:text-text-primary/60 text-text-primary"
+									className="w-full resize-none ring-0 z-20 outline-0 bg-transparent placeholder:text-health-text-sub/50 text-health-dark dark:text-health-bg font-light"
 									name="query"
 									value={query}
 									placeholder={`Create a ${currentPlaceholderText}`}
@@ -234,7 +204,7 @@ export default function Home() {
 									<div></div>
 								)}
 
-								<div className="flex items-center justify-end ml-4 gap-2">
+								<div className="flex items-center justify-end ml-4 gap-3">
 								<ImageUploadButton
 									onFilesSelected={addImages}
 									disabled={isProcessing}
@@ -242,9 +212,9 @@ export default function Home() {
 								<button
 									type="submit"
 									disabled={!query.trim()}
-									className="bg-accent text-white p-1 rounded-md *:size-5 transition-all duration-200 hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+									className="neu-btn p-2.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
 								>
-									<ArrowRight />
+									<ArrowRight className="size-5" />
 								</button>
 							</div>
 							</div>
@@ -261,10 +231,10 @@ export default function Home() {
 							exit={{ opacity: 0, y: -10 }}
 							className="w-full max-w-2xl px-6"
 						>
-							<div className="flex items-start gap-2 px-4 py-3 rounded-xl bg-bg-4/50 dark:bg-bg-2/50 border border-accent/20 dark:border-accent/30 shadow-sm">
-								<Info className="size-4 text-accent flex-shrink-0 mt-0.5" />
-								<p className="text-xs text-text-tertiary leading-relaxed">
-									<span className="font-medium text-text-secondary">Images Beta:</span> Images guide app layout and design but may not be replicated exactly. The coding agent cannot access images directly for app assets.
+							<div className="flex items-start gap-3 px-4 py-3 rounded-xl neu-card-soft">
+								<Info className="size-4 text-health-teal flex-shrink-0 mt-0.5" />
+								<p className="text-xs text-health-text-sub leading-relaxed">
+									<span className="font-medium text-health-dark dark:text-health-bg">Images Beta:</span> Images guide app layout and design but may not be replicated exactly. The coding agent cannot access images directly for app assets.
 								</p>
 							</div>
 						</motion.div>
@@ -283,8 +253,8 @@ export default function Home() {
 							className={clsx('max-w-6xl mx-auto px-4 z-10', images.length > 0 ? 'mt-10' : 'mt-16 mb-8')}
 						>
 							<div className='flex flex-col items-start'>
-								<h2 className="text-2xl font-medium text-text-secondary/80">Discover Apps built by the community</h2>
-								<div ref={discoverLinkRef} className="text-md font-light mb-4 text-text-tertiary hover:underline underline-offset-4 select-text cursor-pointer" onClick={() => navigate('/discover')} >View All</div>
+								<h2 className="font-serif text-2xl text-health-dark dark:text-health-bg">Discover Apps built by the community</h2>
+								<div ref={discoverLinkRef} className="text-sm font-light mb-4 text-health-text-sub hover:text-health-teal transition-colors cursor-pointer" onClick={() => navigate('/discover')} >View All</div>
 								<motion.div
 									layout
 									transition={{ duration: 0.4 }}
