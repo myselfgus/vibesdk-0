@@ -93,15 +93,17 @@ export class FileManager implements IFileManager {
     }
 
     async saveGeneratedFiles(files: FileOutputType[], commitMessage?: string, overwrite: boolean = false): Promise<FileState[]> {
-        const filesMap = { ...this.stateManager.getState().generatedFilesMap };
+        const previousState = this.stateManager.getState();
+        const previousFilesMap = { ...previousState.generatedFilesMap };
+        const filesMap = { ...previousFilesMap };
         const fileStates: FileState[] = [];
-        
+
         // Filter out protected files
         if (!overwrite) {
             const templateDetails = this.getTemplateDetailsFunc();
             if (templateDetails && templateDetails.dontTouchFiles) {
                 const dontTouchSet = new Set(templateDetails.dontTouchFiles);
-                
+
                 files = files.filter(file => {
                     if (dontTouchSet.has(file.filePath)) {
                         console.warn(`[FileManager] Skipping protected file: ${file.filePath}`);
@@ -111,14 +113,14 @@ export class FileManager implements IFileManager {
                 });
             }
         }
-        
+
         for (const file of files) {
             let lastDiff = '';
             const oldFile = filesMap[file.filePath];
-            
+
             // Get comparison base: from generatedFilesMap, template/filesystem, or empty string for new files
             const oldFileContents = oldFile?.fileContents ?? (this.getFile(file.filePath)?.fileContents || '');
-            
+
             // Generate diff if contents changed
             if (oldFileContents !== file.fileContents) {
                 try {
@@ -127,7 +129,7 @@ export class FileManager implements IFileManager {
                     console.error(`Failed to generate diff for file ${file.filePath}:`, error);
                 }
             }
-            
+
             const fileState = {
                 ...file,
                 lasthash: '',
@@ -138,7 +140,8 @@ export class FileManager implements IFileManager {
             filesMap[file.filePath] = fileState;
             fileStates.push(fileState);
         }
-        
+
+        // Update state before git commit
         this.stateManager.setState({
             ...this.stateManager.getState(),
             generatedFilesMap: filesMap
@@ -147,7 +150,6 @@ export class FileManager implements IFileManager {
         try {
             const shouldCommit = fileStates.length > 0 && fileStates.some(fileState => fileState.lastDiff !== '');
             if (shouldCommit) {
-                // If commit message is available, commit, else stage
                 if (commitMessage) {
                     const unescapedMessage = commitMessage.replace(/\\n/g, '\n').replace(/\\t/g, '\t');
                     console.log(`[FileManager] Committing ${fileStates.length} files:`, unescapedMessage);
@@ -160,7 +162,13 @@ export class FileManager implements IFileManager {
                 }
             }
         } catch (error) {
-            console.error(`[FileManager] Failed to commit files:`, error, commitMessage);
+            // Rollback state on git failure to maintain consistency
+            console.error(`[FileManager] Failed to commit files, rolling back state:`, error, commitMessage);
+            this.stateManager.setState({
+                ...this.stateManager.getState(),
+                generatedFilesMap: previousFilesMap
+            });
+            throw error;
         }
         return fileStates;
     }

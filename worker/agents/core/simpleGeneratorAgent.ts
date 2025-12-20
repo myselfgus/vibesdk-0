@@ -907,7 +907,13 @@ export class SimpleCodeGeneratorAgent extends Agent<Env, CodeGenState> {
         } finally {
             // Clear abort controller after generation completes
             this.clearAbortController();
-            
+
+            // Reset shouldBeGenerating flag to prevent infinite retry loops on reconnect
+            this.setState({
+                ...this.state,
+                shouldBeGenerating: false,
+            });
+
             const appService = new AppService(this.env);
             await appService.updateApp(
                 this.getAgentId(),
