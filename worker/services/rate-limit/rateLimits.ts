@@ -1,4 +1,4 @@
-import { RateLimitType, RateLimitStore, RateLimitSettings, DORateLimitConfig, KVRateLimitConfig } from './config';
+import { RateLimitType, RateLimitStore, RateLimitSettings, DORateLimitConfig, KVRateLimitConfig, LLMCallsRateLimitConfig } from './config';
 import { createObjectLogger } from '../../logger';
 import { AuthUser } from '../../types/auth-types';
 import { extractTokenWithMetadata, extractRequestMetadata } from '../../utils/authUtils';
@@ -7,6 +7,8 @@ import { KVRateLimitStore } from './KVRateLimitStore';
 import { RateLimitExceededError, SecurityError } from 'shared/types/errors';
 import { isDev } from 'worker/utils/envs';
 import { AI_MODEL_CONFIG, AIModels } from 'worker/agents/inferutils/config.types';
+import { SecretsService } from '../../database/services/SecretsService';
+import { getProviderFromModel } from '../../api/controllers/modelConfig/byokHelper';
 
 export class RateLimitService {
     static logger = createObjectLogger(this, 'RateLimitService');
@@ -241,20 +243,42 @@ export class RateLimitService {
         model: AIModels | string,
         suffix: string = ""
 	): Promise<void> {
-		
-		if (!config[RateLimitType.LLM_CALLS].enabled) {
+		const llmConfig = config[RateLimitType.LLM_CALLS] as LLMCallsRateLimitConfig;
+
+		if (!llmConfig.enabled) {
 			return;
 		}
 
+		// Check if user has BYOK key for the model's provider (lightweight check, no decryption)
+		if (llmConfig.excludeBYOKUsers) {
+			try {
+				const provider = getProviderFromModel(model);
+				const secretsService = new SecretsService(env);
+				const hasBYOKKey = await secretsService.hasActiveBYOKKeyForProvider(userId, provider);
+
+				if (hasBYOKKey) {
+					this.logger.info('Skipping LLM rate limit for BYOK user', {
+						userId,
+						provider,
+						model
+					});
+					return;
+				}
+			} catch (error) {
+				this.logger.warn('Failed to check BYOK status, applying rate limit', {
+					userId,
+					error: error instanceof Error ? error.message : 'Unknown error'
+				});
+			}
+		}
+
 		const identifier = `user:${userId}`;
-		
 		const key = this.buildRateLimitKey(RateLimitType.LLM_CALLS, `${identifier}${suffix}`);
-		
+
 		try {
-            // Increment by model's credit cost
             const modelConfig = AI_MODEL_CONFIG[model as AIModels];
             const incrementBy = modelConfig.creditCost;
-            
+
 			const success = await this.enforce(env, key, config, RateLimitType.LLM_CALLS, incrementBy);
 			if (!success) {
 				this.logger.warn('LLM calls rate limit exceeded', {
@@ -272,10 +296,10 @@ export class RateLimitService {
                     incrementBy
 				});
 				throw new RateLimitExceededError(
-					`AI inference rate limit exceeded. Consider using lighter models. Maximum ${config.llmCalls.limit} credits per ${config.llmCalls.period / 3600} hour${config.llmCalls.period >= 7200 ? 's' : ''} or ${config.llmCalls.dailyLimit} credits per day.`,
+					`AI inference rate limit exceeded. Consider using lighter models. Maximum ${llmConfig.limit} credits per ${llmConfig.period / 3600} hour${llmConfig.period >= 7200 ? 's' : ''} or ${llmConfig.dailyLimit} credits per day.`,
 					RateLimitType.LLM_CALLS,
-					config.llmCalls.limit,
-					config.llmCalls.period,
+					llmConfig.limit,
+					llmConfig.period,
                     [`Please try again in due time when the limit resets for you. The current model costs ${incrementBy} credits per call. Please go to settings to change your default model.`]
 				);
 			}
