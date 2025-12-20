@@ -156,13 +156,13 @@ export default function Home() {
 							<div
 								className={clsx(
 									"flex-1 flex flex-col relative",
-									isDragging && "ring-2 ring-health-teal/30 ring-offset-2 rounded-xl"
+									isDragging && "ring-2 ring-ring ring-offset-2"
 								)}
 								{...dragHandlers}
 							>
 								{isDragging && (
-									<div className="absolute inset-0 flex items-center justify-center bg-health-teal/5 backdrop-blur-sm rounded-xl z-30 pointer-events-none">
-										<p className="text-health-teal font-medium">Drop images here</p>
+									<div className="absolute inset-0 flex items-center justify-center bg-muted backdrop-blur-sm z-30 pointer-events-none">
+										<p className="text-primary font-medium">Drop images here</p>
 									</div>
 								)}
 								<textarea
@@ -232,7 +232,7 @@ export default function Home() {
 							className="w-full max-w-2xl px-6"
 						>
 							<div className="flex items-start gap-3 px-4 py-3 rounded-xl neu-card-soft">
-								<Info className="size-4 text-health-teal flex-shrink-0 mt-0.5" />
+								<Info className="size-4 text-foreground flex-shrink-0 mt-0.5" />
 								<p className="text-xs text-health-text-sub leading-relaxed">
 									<span className="font-medium text-health-dark dark:text-health-bg">Images Beta:</span> Images guide app layout and design but may not be replicated exactly. The coding agent cannot access images directly for app assets.
 								</p>
@@ -254,7 +254,7 @@ export default function Home() {
 						>
 							<div className='flex flex-col items-start'>
 								<h2 className="font-serif text-2xl text-health-dark dark:text-health-bg">Discover Apps built by the community</h2>
-								<div ref={discoverLinkRef} className="text-sm font-light mb-4 text-health-text-sub hover:text-health-teal transition-colors cursor-pointer" onClick={() => navigate('/discover')} >View All</div>
+								<div ref={discoverLinkRef} className="text-sm font-light mb-4 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" onClick={() => navigate('/discover')} >View All</div>
 								<motion.div
 									layout
 									transition={{ duration: 0.4 }}

@@ -16,8 +16,8 @@ export function Header({
 		>
 			<h1 className="flex items-center gap-2 mx-4">
 				<Link to="/" className="flex items-center gap-2">
-					<div className="w-6 h-6 rounded-lg bg-gradient-to-br from-health-teal to-health-teal/80 flex items-center justify-center shadow-sm">
-						<Sparkles className="w-3 h-3 text-white" />
+					<div className="w-6 h-6 bg-primary flex items-center justify-center shadow-sm">
+						<Sparkles className="w-3 h-3 text-primary-foreground" />
 					</div>
 					<span className="font-serif text-base text-health-dark dark:text-health-bg">vibesdk</span>
 				</Link>

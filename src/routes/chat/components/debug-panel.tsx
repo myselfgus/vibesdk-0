@@ -776,10 +776,10 @@ function DebugPanelCore({ messages, onClear, chatSessionId }: DebugPanelProps) {
                             <div className="text-sm text-blue-800">Total Lines</div>
                           </div>
                           <div className="bg-bg-4/70 dark:bg-bg-4/50 rounded-lg p-4 text-center">
-                            <div className="text-2xl font-bold text-teal-600">
+                            <div className="text-2xl font-bold text-foreground">
                               {analyticsData.operations.fileGeneration.duration.count}
                             </div>
-                            <div className="text-sm text-teal-800">Files Generated</div>
+                            <div className="text-sm text-muted-foreground">Files Generated</div>
                           </div>
                         </div>
                         

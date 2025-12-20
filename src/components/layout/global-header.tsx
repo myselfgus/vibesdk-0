@@ -52,8 +52,8 @@ export function GlobalHeader() {
 							>
 								<SidebarTrigger className="h-8 w-8 text-health-dark dark:text-health-bg rounded-xl neu-icon-btn transition-colors duration-200" />
 								<div className="flex items-center gap-2 ml-3">
-									<div className="w-8 h-8 rounded-xl bg-gradient-to-br from-health-teal to-health-teal/80 flex items-center justify-center shadow-md">
-										<Sparkles className="w-4 h-4 text-white" />
+									<div className="w-8 h-8 bg-primary flex items-center justify-center shadow-md">
+										<Sparkles className="w-4 h-4 text-primary-foreground" />
 									</div>
 									<span className="font-serif text-lg text-health-dark dark:text-health-bg hidden sm:block">vibesdk</span>
 								</div>
@@ -62,12 +62,12 @@ export function GlobalHeader() {
 										type="button"
 										onClick={hasChangeLogs ? () => setIsChangelogOpen(true) : undefined}
 										disabled={!hasChangeLogs}
-										className={`flex max-w-full items-center gap-2 rounded-full border border-health-teal/30 bg-white/80 dark:bg-health-dark/80 px-3 ml-4 py-1.5 text-xs text-health-dark dark:text-health-bg shadow-sm backdrop-blur transition-colors hover:bg-health-teal/10 focus:outline-none focus:ring-2 focus:ring-health-teal/40 md:text-sm${!hasChangeLogs ? ' opacity-50 cursor-not-allowed pointer-events-none' : ''}`}
+										className={`flex max-w-full items-center gap-2 border border-border bg-background/80 px-3 ml-4 py-1.5 text-xs text-foreground shadow-sm backdrop-blur transition-colors hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring md:text-sm${!hasChangeLogs ? ' opacity-50 cursor-not-allowed pointer-events-none' : ''}`}
 										aria-label="Platform updates"
 									>
-										<AlertCircle className="h-4 w-4 text-health-teal" />
+										<AlertCircle className="h-4 w-4 text-foreground" />
 										<span className="truncate max-w-[46ch] md:max-w-[60ch]">{status.globalUserMessage}</span>
-										<ChevronRight className="ml-1 h-4 w-4 text-health-teal" />
+										<ChevronRight className="ml-1 h-4 w-4 text-foreground" />
 									</button>
 								)}
 							</motion.div>
