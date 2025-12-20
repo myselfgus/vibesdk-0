@@ -91,6 +91,27 @@
 @plugin '@tailwindcss/typography';
 
 @theme inline {
+  /* Tailwind v4 Color Definitions for 1one */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
   /* Border Radius - All Zero for Sharp Edges */
   --radius-sm: 0;
   --radius-md: 0;
@@ -98,12 +119,6 @@
   --radius-xl: 0;
   --radius-20px: 0;
   --radius-24px: 0;
-
-  /* Theme Colors */
-  --color-accent: var(--primary);
-  --color-destructive: var(--destructive);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
 
   /* Build Chat Colors - Mapped to 1one */
   --color-bg-1: var(--muted);
@@ -300,15 +315,17 @@
    ======================================== */
 @layer base {
   * {
-    @apply border-border-primary outline-ring/50;
     border-radius: 0 !important;
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased h-full;
+    background-color: var(--background);
+    color: var(--foreground);
     font-family: 'Space Grotesk', system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   .dark body {
@@ -317,20 +334,20 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Josefin Sans', Georgia, serif;
-    @apply font-normal;
+    font-weight: 400;
   }
 
   strong, b {
-    @apply font-semibold;
+    font-weight: 600;
   }
 
   button {
-    @apply cursor-pointer;
+    cursor: pointer;
     border-radius: 0 !important;
   }
 
   select {
-    @apply cursor-pointer;
+    cursor: pointer;
     border-radius: 0 !important;
   }
 
@@ -553,13 +570,13 @@
 
 /* Prose - 1ONE Typography */
 .prose {
-  --tw-prose-th-headers: --value(var(--color-text));
-  --tw-prose-body: --value(var(--color-text));
-  --tw-prose-headings: --value(var(--color-text));
-  --tw-prose-code: --value(var(--color-text));
-  --tw-prose-bold: --value(var(--color-text));
-  --tw-prose-quotes: --value(var(--color-text));
-  --tw-prose-counters: --value(var(--color-text));
+  --tw-prose-th-headers: var(--color-text);
+  --tw-prose-body: var(--color-text);
+  --tw-prose-headings: var(--color-text);
+  --tw-prose-code: var(--color-text);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-quotes: var(--color-text);
+  --tw-prose-counters: var(--color-text);
 }
 
 /* Chat Messages Scrollbar */
