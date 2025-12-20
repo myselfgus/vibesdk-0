@@ -468,3 +468,49 @@
 @media (prefers-reduced-motion: reduce) {
   .chat-edge-throb { animation: none; }
 }
+
+
+/* =============================================
+   1ONE DESIGN SYSTEM - GLOBAL SHARP EDGES
+   This ensures all rounded classes are overridden
+   ============================================= */
+
+/* Override ALL Tailwind rounded utilities globally */
+[class*="rounded"] {
+	border-radius: 0 !important;
+}
+
+.rounded,
+.rounded-none,
+.rounded-sm,
+.rounded-md,
+.rounded-lg,
+.rounded-xl,
+.rounded-2xl,
+.rounded-3xl,
+.rounded-full {
+	border-radius: 0 !important;
+}
+
+/* Override Radix UI components */
+[data-radix-popper-content-wrapper] [class*="rounded"],
+[data-radix-menu-content] [class*="rounded"],
+[data-radix-select-content] [class*="rounded"],
+[data-radix-dialog-content] [class*="rounded"],
+[data-radix-popover-content] [class*="rounded"],
+[data-radix-tooltip-content] [class*="rounded"] {
+	border-radius: 0 !important;
+}
+
+/* Ensure form elements are sharp */
+input,
+textarea,
+select,
+button {
+	border-radius: 0 !important;
+}
+
+/* Override any inline border-radius */
+* {
+	border-radius: 0 !important;
+}
