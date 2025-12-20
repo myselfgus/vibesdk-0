@@ -58,6 +58,8 @@ export interface HandleMessageDeps {
     previewUrl: string | undefined;
     projectStages: any[];
     isGenerating: boolean;
+    autoResumeAttempts: React.MutableRefObject<number>;
+    deploymentTimeoutRef: React.MutableRefObject<NodeJS.Timeout | null>;
     urlChatId: string | undefined;
     
     // Functions
@@ -251,12 +253,25 @@ export function createWebSocketMessageHandler(deps: HandleMessageDeps) {
                     }
 
                     setIsInitialStateRestored(true);
-                    
+
+                    const MAX_AUTO_RESUME_ATTEMPTS = 3;
                     if (state.shouldBeGenerating && !isGenerating) {
-                        logger.debug('🔄 Reconnected with shouldBeGenerating=true, auto-resuming generation');
-                        setIsGenerating(true); 
-                        updateStage('code', { status: 'active' });
-                        sendWebSocketMessage(websocket, 'generate_all');
+                        if (deps.autoResumeAttempts.current >= MAX_AUTO_RESUME_ATTEMPTS) {
+                            logger.warn(`Auto-resume limit reached (${MAX_AUTO_RESUME_ATTEMPTS}), not resuming to prevent infinite loop`);
+                            deps.sendMessage(createAIMessage(
+                                'generation_error',
+                                'Generation was interrupted and could not be resumed automatically. Please try again manually.',
+                            ));
+                            sendWebSocketMessage(websocket, 'stop_generation');
+                        } else {
+                            deps.autoResumeAttempts.current += 1;
+                            logger.debug(`Reconnected with shouldBeGenerating=true, auto-resuming generation (attempt ${deps.autoResumeAttempts.current}/${MAX_AUTO_RESUME_ATTEMPTS})`);
+                            setIsGenerating(true);
+                            updateStage('code', { status: 'active' });
+                            sendWebSocketMessage(websocket, 'generate_all');
+                        }
+                    } else if (!state.shouldBeGenerating) {
+                        deps.autoResumeAttempts.current = 0;
                     }
                 }
                 break;
@@ -728,11 +743,17 @@ export function createWebSocketMessageHandler(deps: HandleMessageDeps) {
             }
 
             case 'cloudflare_deployment_completed': {
+                // Clear deployment timeout
+                if (deps.deploymentTimeoutRef.current) {
+                    clearTimeout(deps.deploymentTimeoutRef.current);
+                    deps.deploymentTimeoutRef.current = null;
+                }
+
                 setIsDeploying(false);
                 setCloudflareDeploymentUrl(message.deploymentUrl);
                 setDeploymentError('');
                 setIsRedeployReady(false);
-                
+
                 sendMessage(createAIMessage('cloudflare_deployment_completed', `Your project has been permanently deployed to Cloudflare Workers: ${message.deploymentUrl}`));
                 
                 onDebugMessage?.('info', 
@@ -744,12 +765,18 @@ export function createWebSocketMessageHandler(deps: HandleMessageDeps) {
             }
 
             case 'cloudflare_deployment_error': {
+                // Clear deployment timeout
+                if (deps.deploymentTimeoutRef.current) {
+                    clearTimeout(deps.deploymentTimeoutRef.current);
+                    deps.deploymentTimeoutRef.current = null;
+                }
+
                 setIsDeploying(false);
                 setDeploymentError(message.error || 'Unknown deployment error');
                 setCloudflareDeploymentUrl('');
                 setIsRedeployReady(true);
-                
-                sendMessage(createAIMessage('cloudflare_deployment_error', `❌ Deployment failed: ${message.error}\n\n🔄 You can try deploying again.`));
+
+                sendMessage(createAIMessage('cloudflare_deployment_error', `Deployment failed: ${message.error}\n\nYou can try deploying again.`));
 
                 toast.error(`Error: ${message.error}`);
                 

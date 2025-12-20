@@ -145,6 +145,7 @@
         "DISPATCH_NAMESPACE": "vibesdk-default-namespace",
         "ENABLE_READ_REPLICAS": "true",
         "CLOUDFLARE_AI_GATEWAY": "voither",
+        "PLATFORM_MODEL_PROVIDERS": "google-ai-studio,openai,grok",
         "CUSTOM_DOMAIN": "build.voither.com",
         "MAX_SANDBOX_INSTANCES": "4",
         "SANDBOX_INSTANCE_TYPE": "standard-4",
