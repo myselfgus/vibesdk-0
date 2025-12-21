@@ -156,17 +156,17 @@ export default function Home() {
 							<div
 								className={clsx(
 									"flex-1 flex flex-col relative",
-									isDragging && "ring-2 ring-health-teal/30 ring-offset-2 rounded-xl"
+									isDragging && "ring-2 ring-brand-primary/30 ring-offset-2 rounded-xl"
 								)}
 								{...dragHandlers}
 							>
 								{isDragging && (
-									<div className="absolute inset-0 flex items-center justify-center bg-health-teal/5 backdrop-blur-sm rounded-xl z-30 pointer-events-none">
-										<p className="text-health-teal font-medium">Drop images here</p>
+									<div className="absolute inset-0 flex items-center justify-center bg-brand-primary/5 backdrop-blur-sm rounded-xl z-30 pointer-events-none">
+										<p className="text-brand-primary font-medium">Drop images here</p>
 									</div>
 								)}
 								<textarea
-									className="w-full resize-none ring-0 z-20 outline-0 bg-transparent placeholder:text-health-text-sub/50 text-health-dark dark:text-health-bg font-light"
+									className="w-full resize-none ring-0 z-20 outline-0 bg-transparent placeholder:text-text-tertiary text-text-primary dark:text-text-primary font-light"
 									name="query"
 									value={query}
 									placeholder={`Create a ${currentPlaceholderText}`}
@@ -232,9 +232,9 @@ export default function Home() {
 							className="w-full max-w-2xl px-6"
 						>
 							<div className="flex items-start gap-3 px-4 py-3 rounded-xl neu-card-soft">
-								<Info className="size-4 text-health-teal flex-shrink-0 mt-0.5" />
-								<p className="text-xs text-health-text-sub leading-relaxed">
-									<span className="font-medium text-health-dark dark:text-health-bg">Images Beta:</span> Images guide app layout and design but may not be replicated exactly. The coding agent cannot access images directly for app assets.
+								<Info className="size-4 text-brand-primary flex-shrink-0 mt-0.5" />
+								<p className="text-xs text-text-secondary leading-relaxed">
+									<span className="font-medium text-text-primary dark:text-text-primary">Images Beta:</span> Images guide app layout and design but may not be replicated exactly. The coding agent cannot access images directly for app assets.
 								</p>
 							</div>
 						</motion.div>
@@ -253,8 +253,8 @@ export default function Home() {
 							className={clsx('max-w-6xl mx-auto px-4 z-10', images.length > 0 ? 'mt-10' : 'mt-16 mb-8')}
 						>
 							<div className='flex flex-col items-start'>
-								<h2 className="font-serif text-2xl text-health-dark dark:text-health-bg">Discover Apps built by the community</h2>
-								<div ref={discoverLinkRef} className="text-sm font-light mb-4 text-health-text-sub hover:text-health-teal transition-colors cursor-pointer" onClick={() => navigate('/discover')} >View All</div>
+								<h2 className="font-serif text-2xl text-text-primary dark:text-text-primary">Discover Apps built by the community</h2>
+								<div ref={discoverLinkRef} className="text-sm font-light mb-4 text-text-secondary hover:text-brand-primary transition-colors cursor-pointer" onClick={() => navigate('/discover')} >View All</div>
 								<motion.div
 									layout
 									transition={{ duration: 0.4 }}
@@ -478,3 +478,4 @@ export const CurvedArrow: React.FC<ArrowProps> = ({
 		</svg>
 	);
 };
+
