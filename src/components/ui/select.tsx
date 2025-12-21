@@ -1,4 +1,4 @@
-import * as React from "react"
+himport * as React from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 
@@ -43,8 +43,8 @@ function SelectTrigger({
 				  {children}
 			        <SelectPrimitive.Icon asChild>
 					        <ChevronDownIcon className="size-4 text-muted-foreground" />
-					</SelectPrimitive.Icon>SelectPrimitive.Icon>
-			  </SelectPrimitive.Trigger>SelectPrimitive.Trigger>
+					</SelectPrimitive.Icon>
+			  </SelectPrimitive.Trigger>
 		    )
 }
 
@@ -76,10 +76,10 @@ function SelectContent({
 											            )}
 								        >
 								{children}
-							</SelectPrimitive.Viewport>SelectPrimitive.Viewport>
+							</SelectPrimitive.Viewport>
 					        <SelectScrollDownButton />
-					</SelectPrimitive.Content>SelectPrimitive.Content>
-			  </SelectPrimitive.Portal>SelectPrimitive.Portal>
+					</SelectPrimitive.Content>
+			  </SelectPrimitive.Portal>
 		    )
 }
 
@@ -113,10 +113,10 @@ function SelectItem({
 			        <span className="absolute right-2 flex size-3.5 items-center justify-center">
 					        <SelectPrimitive.ItemIndicator>
 							          <CheckIcon className="size-4 text-foreground" />
-							</SelectPrimitive.ItemIndicator>SelectPrimitive.ItemIndicator>
-					</span>span>
-			        <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>SelectPrimitive.ItemText>
-			  </SelectPrimitive.Item>SelectPrimitive.Item>
+							</SelectPrimitive.ItemIndicator>
+					</span>
+			        <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+			  </SelectPrimitive.Item>
 		    )
 		  }
 		  
@@ -147,7 +147,7 @@ function SelectScrollUpButton({
 				  {...props}
 				      >
 			        <ChevronUpIcon className="size-4" />
-			  </SelectPrimitive.ScrollUpButton>SelectPrimitive.ScrollUpButton>
+			  </SelectPrimitive.ScrollUpButton>
 		    )
 }
 
@@ -165,7 +165,7 @@ function SelectScrollDownButton({
 				  {...props}
 				      >
 			        <ChevronDownIcon className="size-4" />
-			  </SelectPrimitive.ScrollDownButton>SelectPrimitive.ScrollDownButton>
+			  </SelectPrimitive.ScrollDownButton>
 		    )
 }
 
@@ -180,4 +180,4 @@ export {
 	  SelectSeparator,
 	  SelectTrigger,
 	  SelectValue,
-}</SelectPrimitive.Trigger>
+}
