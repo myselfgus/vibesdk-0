@@ -54,9 +54,9 @@ export function GlobalHeader() {
 																													<div className="flex items-center gap-2 ml-3">
 																																						<div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-md">
 																																																<Sparkles className="w-4 h-4 text-white" />
-																																						</div>div>
+																																						</div>
 																																						<span className="font-serif text-lg text-foreground dark:text-background hidden sm:block">vibesdk</span>span>
-																													</div>div>
+																													</div>
 																						{hasMaintenanceMessage && (
 																																							<button
 																																																		type="button"
@@ -70,9 +70,9 @@ export function GlobalHeader() {
 																																																	<ChevronRight className="ml-1 h-4 w-4 text-foreground" />
 																																							</button>button>
 																													)}
-																					</motion.div>motion.div>
+																					</motion.div>
 																				) : (
-																					<div></div>div>
+																					<div></div>
 																								)}
 																		
 																		
@@ -86,27 +86,27 @@ export function GlobalHeader() {
 																															>
 																															<ThemeToggle />
 																															<AuthButton />
-																								</motion.div>motion.div>
-																		</div>div>
-													</div>div>
-									</motion.header>motion.header>
+																								</motion.div>
+																		</div>
+													</div>
+									</motion.header>
 						{hasChangeLogs && (
 										<DialogContent className="max-w-xl">
 															<DialogHeader>
-																					<DialogTitle>Platform updates</DialogTitle>DialogTitle>
+																					<DialogTitle>Platform updates</DialogTitle>
 																{status.globalUserMessage && (
 																		<DialogDescription className="text-sm text-muted-foreground">
 																			{status.globalUserMessage}
-																		</DialogDescription>DialogDescription>
+																		</DialogDescription>
 																					)}
-															</DialogHeader>DialogHeader>
+															</DialogHeader>
 															<ScrollArea className="max-h-[60vh] pr-4">
 																					<p className="whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground">
 																						{status.changeLogs}
-																					</p>p>
-															</ScrollArea>ScrollArea>
-										</DialogContent>DialogContent>
+																					</p>
+															</ScrollArea>
+										</DialogContent>
 								)}
-					</Dialog>Dialog>
+					</Dialog>
 				);
-}</motion.header>
+}
