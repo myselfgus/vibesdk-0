@@ -97,7 +97,8 @@
       {
         "binding": "TEMPLATES_BUCKET",
         "bucket_name": "vibesdk-templates",
-        "remote": true,"preview_bucket_name": "vibesdk-templates"
+        "remote": true,
+        "preview_bucket_name": "vibesdk-templates"
       }
     ],
     "kv_namespaces": [
@@ -127,13 +128,8 @@
 	],
 	"routes": [
         {
-            "pattern": "build.cloudflare.dev",
+            "pattern": "build.voither.com",
             "custom_domain": true
-        },
-        {
-            "pattern": "*build-preview.cloudflare.dev/*",
-            "custom_domain": false,
-            "zone_id": "db01fac4261b2604aacad8410443a3e2"
         }
     ],
 	"vars": {
@@ -148,6 +144,6 @@
         "SANDBOX_INSTANCE_TYPE": "standard-4",
         "USE_CLOUDFLARE_IMAGES": "true"
     },
-	"workers_dev": false,
-	"preview_urls": false
+	"workers_dev": true,
+	"preview_urls": true
 }
