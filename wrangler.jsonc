@@ -132,9 +132,9 @@
             "custom_domain": true
         },
         {
-            // Wildcard route for Container preview URLs
-            // Requires DNS record: *.build.voither.com -> 100:: (proxied)
-            "pattern": "*.build.voither.com/*",
+            // Route for Container preview URLs
+            // Uses previews.voither.com (covered by *.voither.com SSL cert)
+            "pattern": "previews.voither.com/*",
             "zone_id": "018e17f21e9ad23b24ff894908be4149"
         }
     ],
@@ -146,6 +146,7 @@
         "CLOUDFLARE_AI_GATEWAY": "voither",
         "PLATFORM_MODEL_PROVIDERS": "anthropic,google-ai-studio,openai,grok,google-vertex-ai",
         "CUSTOM_DOMAIN": "build.voither.com",
+        "CUSTOM_PREVIEW_DOMAIN": "previews.voither.com",
         "MAX_SANDBOX_INSTANCES": "4",
         "SANDBOX_INSTANCE_TYPE": "standard-4",
         "USE_CLOUDFLARE_IMAGES": "true"
