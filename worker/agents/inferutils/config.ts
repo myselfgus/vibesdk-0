@@ -4,8 +4,6 @@ import {
     AgentConstraintConfig, 
     AIModels,
     AllModels,
-    LiteModels,
-    RegularModels,
 } from "./config.types";
 import { env } from 'cloudflare:workers';
 
@@ -18,25 +16,25 @@ const COMMON_AGENT_CONFIGS = {
         temperature: 0.6,
     },
     screenshotAnalysis: {
-        name: AIModels.DISABLED,
+        name: AIModels.GEMINI_2_5_FLASH,
         reasoning_effort: 'medium' as const,
         max_tokens: 8000,
         temperature: 1,
-        fallbackModel: AIModels.GEMINI_2_5_FLASH,
+        fallbackModel: AIModels.GEMINI_2_5_PRO,
     },
     realtimeCodeFixer: {
-        name: AIModels.DISABLED,
+        name: AIModels.GEMINI_2_5_FLASH,
         reasoning_effort: 'low' as const,
         max_tokens: 32000,
         temperature: 1,
-        fallbackModel: AIModels.GEMINI_2_5_FLASH,
+        fallbackModel: AIModels.GEMINI_2_5_PRO,
     },
     fastCodeFixer: {
-        name: AIModels.DISABLED,
+        name: AIModels.GEMINI_2_5_PRO,
         reasoning_effort: undefined,
         max_tokens: 64000,
         temperature: 0.0,
-        fallbackModel: AIModels.GEMINI_2_5_PRO,
+        fallbackModel: AIModels.GEMINI_2_5_FLASH,
     },
 } as const;
 
@@ -166,13 +164,14 @@ export const AGENT_CONFIG: AgentConfig = env.PLATFORM_MODEL_PROVIDERS
     : DEFAULT_AGENT_CONFIG;
 
 
+// All agent actions now allow ALL models for maximum flexibility
 export const AGENT_CONSTRAINTS: Map<AgentActionKey, AgentConstraintConfig> = new Map([
 	['fastCodeFixer', {
-		allowedModels: new Set([AIModels.DISABLED]),
+		allowedModels: new Set(AllModels),
 		enabled: true,
 	}],
 	['realtimeCodeFixer', {
-		allowedModels: new Set([AIModels.DISABLED]),
+		allowedModels: new Set(AllModels),
 		enabled: true,
 	}],
 	['fileRegeneration', {
@@ -184,15 +183,15 @@ export const AGENT_CONSTRAINTS: Map<AgentActionKey, AgentConstraintConfig> = new
 		enabled: true,
 	}],
 	['projectSetup', {
-		allowedModels: new Set([...RegularModels, AIModels.GEMINI_2_5_PRO]),
+		allowedModels: new Set(AllModels),
 		enabled: true,
 	}],
 	['conversationalResponse', {
-		allowedModels: new Set(RegularModels),
+		allowedModels: new Set(AllModels),
 		enabled: true,
 	}],
 	['templateSelection', {
-		allowedModels: new Set(LiteModels),
+		allowedModels: new Set(AllModels),
 		enabled: true,
 	}],
 ]);
