@@ -130,6 +130,12 @@
         {
             "pattern": "build.voither.com",
             "custom_domain": true
+        },
+        {
+            // Wildcard route for Container preview URLs
+            // Requires DNS record: *.build.voither.com -> 100:: (proxied)
+            "pattern": "*.build.voither.com/*",
+            "zone_id": "018e17f21e9ad23b24ff894908be4149"
         }
     ],
 	"vars": {
