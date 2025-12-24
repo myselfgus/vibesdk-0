@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "voither-btn",
-        destructive: "bg-health-danger text-white shadow-[2px_3px_7px_-1px_rgba(121,121,121,0.25)] rounded-lg hover:opacity-90",
+        destructive: "bg-health-danger text-white shadow-[2px_3px_7px_-1px_rgba(121,121,121,0.8)] rounded-lg hover:opacity-90",
         outline: "voither-btn-secondary",
         secondary: "voither-btn-secondary",
         ghost: "text-health-text-sub shadow-none bg-transparent hover:bg-black/[0.04]",
