@@ -10,11 +10,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "voither-btn",
-        destructive: "bg-health-danger text-white shadow-[2px_3px_7px_-1px_rgba(121,121,121,0.8)] rounded-lg hover:opacity-90",
+        destructive: "bg-[oklch(0.55_0.2_25)] text-white shadow-[2px_3px_7px_-1px_rgba(121,121,121,0.85)] rounded-lg hover:opacity-90",
         outline: "voither-btn-secondary",
         secondary: "voither-btn-secondary",
-        ghost: "text-health-text-sub shadow-none bg-transparent hover:bg-black/[0.04]",
-        link: "text-health-dark underline-offset-4 hover:underline shadow-none",
+        ghost: "text-[oklch(0.5_0.05_0)] shadow-none bg-transparent hover:bg-[oklch(0.92_0.0_0)]",
+        link: "text-[oklch(0.2_0.04_0)] underline-offset-4 hover:underline shadow-none",
       },
       size: {
         default: "h-10 px-6 py-3",

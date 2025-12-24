@@ -9,23 +9,23 @@
 /* ========================================
    VOITHER Design System v1.0
    ----------------------------------------
-   Shadow: 2px 3px 7px -1px #797979 @ 80%
+   Shadow: 2px 3px 7px -1px #797979 @ 85%
    Radius: 0.75rem
    Fonts: Manrope, Josefin Sans, Roboto Mono
-   Colors: OKLCH-based teal primary
+   Colors: OKLCH-based (exact spec)
    ======================================== */
 
 /* Subtle chat edge throb effect - Health Teal */
 @keyframes chat-edge-throb {
   0%, 100% {
     box-shadow:
-      0 0 0 0 rgba(0, 168, 150, 0.08),
-      inset 0 0 0 1px rgba(0, 168, 150, 0.12);
+      0 0 0 0 oklch(0.5 0.12 195 / 0.08),
+      inset 0 0 0 1px oklch(0.5 0.12 195 / 0.12);
   }
   50% {
     box-shadow:
-      0 0 0 3px rgba(0, 184, 165, 0.06),
-      inset 0 0 0 1px rgba(0, 184, 165, 0.16);
+      0 0 0 3px oklch(0.5 0.12 195 / 0.06),
+      inset 0 0 0 1px oklch(0.5 0.12 195 / 0.16);
   }
 }
 
@@ -42,13 +42,13 @@
 @keyframes debug-pulse {
   0%, 100% {
     box-shadow:
-      inset 2px 0 6px rgba(239, 68, 68, 0.08),
-      inset -2px 0 6px rgba(239, 68, 68, 0.08);
+      inset 2px 0 6px oklch(0.55 0.2 25 / 0.08),
+      inset -2px 0 6px oklch(0.55 0.2 25 / 0.08);
   }
   50% {
     box-shadow:
-      inset 2px 0 10px rgba(239, 68, 68, 0.12),
-      inset -2px 0 10px rgba(239, 68, 68, 0.12);
+      inset 2px 0 10px oklch(0.55 0.2 25 / 0.12),
+      inset -2px 0 10px oklch(0.55 0.2 25 / 0.12);
   }
 }
 
@@ -66,35 +66,35 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.03);
+  background: oklch(0.92 0.0 0 / 0.5);
   border-radius: 3px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(239, 68, 68, 0.25);
+  background: oklch(0.55 0.2 25 / 0.25);
   border-radius: 3px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(239, 68, 68, 0.4);
+  background: oklch(0.55 0.2 25 / 0.4);
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.03);
+  background: oklch(0.2 0.04 0 / 0.3);
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(239, 68, 68, 0.35);
+  background: oklch(0.55 0.2 25 / 0.35);
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(239, 68, 68, 0.5);
+  background: oklch(0.55 0.2 25 / 0.5);
 }
 
 @custom-variant dark (&:is(.dark *));
 @plugin '@tailwindcss/typography';
 
-/* VOITHER Theme Tokens */
+/* VOITHER Theme Tokens - EXACT OKLCH VALUES */
 @theme inline {
 	/* Radius - VOITHER standard: 0.75rem */
 	--radius-sm: 0.375rem;
@@ -104,43 +104,52 @@
 	--radius-20px: 1.25rem;
 	--radius-24px: 1.5rem;
 	
+	/* Color mappings */
 	--color-accent: var(--build-accent-color);
 	--color-destructive: var(--destructive);
 	--color-input: var(--input);
 	--color-ring: var(--ring);
 	
-	/* VOITHER Shadow - exact spec: 2px 3px 7px -1px #797979 @ 80% */
-	--shadow-voither: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
+	/* VOITHER Shadow - exact spec: 2px 3px 7px -1px #797979 @ 85% */
+	--shadow-voither: 2px 3px 7px -1px rgba(121, 121, 121, 0.85);
 	--shadow-voither-soft: 1px 2px 4px -1px rgba(121, 121, 121, 0.4);
-	--shadow-voither-hover: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
+	--shadow-voither-hover: 3px 4px 8px -1px rgba(121, 121, 121, 0.85);
 	
 	--shadow-textarea:
 		2px 3px 7px -1px rgba(121, 121, 121, 0.2),
-		0px 0px 0px 1px rgba(240, 240, 240, 0.8);
+		0px 0px 0px 1px #f0f0f0;
 	
+	/* Background colors */
 	--color-bg-1: var(--build-chat-colors-bg-1);
 	--color-bg-2: var(--build-chat-colors-bg-2);
 	--color-bg-3: var(--build-chat-colors-bg-3);
 	--color-bg-4: var(--build-chat-colors-bg-4);
+	
+	/* Border colors */
 	--color-border-primary: var(--build-chat-colors-border-primary);
 	--color-border-secondary: var(--build-chat-colors-border-secondary);
 	--color-border-tertiary: var(--build-chat-colors-border-tertiary);
+	
+	/* Brand colors */
 	--color-danger: var(--build-chat-colors-danger);
 	--color-brand-heavy: var(--build-chat-colors-brand-heavy);
 	--color-brand-primary: var(--build-chat-colors-brand-primary);
 	--color-brand-subtle: var(--build-chat-colors-brand-subtle);
+	
+	/* Text colors */
 	--color-text-inverted: var(--build-chat-colors-text-inverted);
 	--color-text-primary: var(--build-chat-colors-text-primary);
 	--color-text-secondary: var(--build-chat-colors-text-secondary);
 	--color-text-tertiary: var(--build-chat-colors-text-tertiary);
 
-	/* VOITHER Health Design System Colors - OKLCH based */
-	--color-health-bg: #FFFFFF;
-	--color-health-dark: oklch(0.2 0.04 200);
+	/* VOITHER Health Design System Colors - EXACT OKLCH */
+	--color-health-bg: #ffffff;
+	--color-health-dark: oklch(0.2 0.04 0);
 	--color-health-teal: oklch(0.5 0.12 195);
 	--color-health-danger: oklch(0.55 0.2 25);
-	--color-health-text-sub: oklch(0.5 0.05 200);
+	--color-health-text-sub: oklch(0.5 0.05 0);
 
+	/* Animations */
 	--animate-typing-dot: typing-dot 1.2s ease-in-out infinite;
 	--animate-shake: shake 1s ease-in-out;
 	--animate-siri-wave: siriWave 1.4s ease-in-out infinite;
@@ -154,69 +163,163 @@
 	/* VOITHER Radius: 0.75rem */
 	--radius: 0.75rem;
 	
-	/* VOITHER OKLCH Colors */
+	/* ========================================
+	   VOITHER OKLCH Color System - EXACT VALUES
+	   ======================================== */
+	
+	/* Primary */
+	--primary: oklch(0.5 0.12 195);
+	--primary-foreground: oklch(0.99 0 0);
+	
+	/* Secondary */
+	--secondary: oklch(0.88 0.0 0);
+	--secondary-foreground: oklch(0.25 0.0 0);
+	
+	/* Accent */
+	--accent: oklch(0.85 0.0 0);
+	--accent-foreground: oklch(0.22 0.0 0);
+	
+	/* Background & Foreground */
+	--background: #ffffff;
+	--foreground: oklch(0.2 0.04 0);
+	
+	/* Card */
+	--card: oklch(0.98 0.0 0);
+	--card-foreground: oklch(0.2 0.04 0);
+	
+	/* Popover */
+	--popover: oklch(0.99 0.0 0);
+	--popover-foreground: oklch(0.2 0.04 0);
+	
+	/* Muted */
+	--muted: oklch(0.92 0.0 0);
+	--muted-foreground: oklch(0.5 0.05 0);
+	
+	/* Destructive */
 	--destructive: oklch(0.55 0.2 25);
+	--destructive-foreground: oklch(0.99 0 0);
+	
+	/* Border, Input, Ring */
 	--border: #f0f0f0;
 	--input: oklch(0.94 0.03 200);
 	--ring: oklch(0.5 0.12 195 / 0.4);
 	
-	/* Primary teal */
+	/* Chart colors */
+	--chart-1: oklch(0.5 0.12 195);
+	--chart-2: oklch(0.55 0.1 195);
+	--chart-3: oklch(0.45 0.1 195);
+	--chart-4: oklch(0.6 0.08 195);
+	--chart-5: oklch(0.4 0.15 205);
+	
+	/* Sidebar */
+	--sidebar: #ffffff;
+	--sidebar-foreground: oklch(0.25 0.0 0);
+	--sidebar-primary: oklch(0.5 0.12 195);
+	--sidebar-primary-foreground: oklch(0.99 0 0);
+	--sidebar-accent: oklch(0.9 0.04 195);
+	--sidebar-accent-foreground: oklch(0.22 0.0 0);
+	--sidebar-border: #ffffff;
+	--sidebar-ring: oklch(0.5 0.12 195);
+	
+	/* Build system mappings */
 	--build-accent-color: oklch(0.5 0.12 195);
-	
-	/* Background scale */
-	--build-chat-colors-bg-1: oklch(0.92 0.0 200);
-	--build-chat-colors-bg-2: oklch(0.95 0.0 200);
-	--build-chat-colors-bg-3: oklch(0.98 0.0 200);
-	--build-chat-colors-bg-4: #FFFFFF;
-	
-	/* Borders */
+	--build-chat-colors-bg-1: oklch(0.92 0.0 0);
+	--build-chat-colors-bg-2: oklch(0.95 0.0 0);
+	--build-chat-colors-bg-3: oklch(0.98 0.0 0);
+	--build-chat-colors-bg-4: #ffffff;
 	--build-chat-colors-border-primary: #f0f0f0;
-	--build-chat-colors-border-secondary: rgba(240, 240, 240, 0.8);
-	--build-chat-colors-border-tertiary: rgba(0, 0, 0, 0.04);
-	
-	/* Brand colors */
+	--build-chat-colors-border-secondary: oklch(0.95 0.0 0);
+	--build-chat-colors-border-tertiary: oklch(0.9 0.0 0 / 0.5);
 	--build-chat-colors-danger: oklch(0.55 0.2 25);
 	--build-chat-colors-brand-heavy: oklch(0.45 0.12 195);
 	--build-chat-colors-brand-primary: oklch(0.5 0.12 195);
 	--build-chat-colors-brand-subtle: oklch(0.55 0.1 195);
-	
-	/* Text hierarchy */
 	--build-chat-colors-text-inverted: #ffffff;
-	--build-chat-colors-text-primary: oklch(0.2 0.04 200);
-	--build-chat-colors-text-secondary: oklch(0.25 0.04 200);
-	--build-chat-colors-text-tertiary: oklch(0.5 0.05 200);
+	--build-chat-colors-text-primary: oklch(0.2 0.04 0);
+	--build-chat-colors-text-secondary: oklch(0.25 0.04 0);
+	--build-chat-colors-text-tertiary: oklch(0.5 0.05 0);
 }
 
 .dark {
+	/* Primary */
+	--primary: oklch(0.5 0.12 195);
+	--primary-foreground: oklch(0.15 0.02 0);
+	
+	/* Secondary */
+	--secondary: oklch(0.25 0.0 0);
+	--secondary-foreground: oklch(0.88 0.0 0);
+	
+	/* Accent */
+	--accent: oklch(0.22 0.0 0);
+	--accent-foreground: oklch(0.85 0.0 0);
+	
+	/* Background & Foreground */
+	--background: oklch(0.15 0.02 0);
+	--foreground: oklch(0.95 0.02 0);
+	
+	/* Card */
+	--card: oklch(0.18 0.02 0);
+	--card-foreground: oklch(0.95 0.02 0);
+	
+	/* Popover */
+	--popover: oklch(0.2 0.02 0);
+	--popover-foreground: oklch(0.95 0.02 0);
+	
+	/* Muted */
+	--muted: oklch(0.25 0.02 0);
+	--muted-foreground: oklch(0.6 0.03 0);
+	
+	/* Destructive */
 	--destructive: oklch(0.55 0.2 25);
-	--border: rgba(255, 255, 255, 0.08);
-	--input: oklch(0.25 0.02 200);
+	--destructive-foreground: oklch(0.99 0 0);
+	
+	/* Border, Input, Ring */
+	--border: oklch(0.25 0.02 0);
+	--input: oklch(0.22 0.02 0);
 	--ring: oklch(0.5 0.12 195 / 0.4);
+	
+	/* Chart colors */
+	--chart-1: oklch(0.55 0.12 195);
+	--chart-2: oklch(0.6 0.1 195);
+	--chart-3: oklch(0.5 0.1 195);
+	--chart-4: oklch(0.65 0.08 195);
+	--chart-5: oklch(0.45 0.15 205);
+	
+	/* Sidebar */
+	--sidebar: oklch(0.15 0.02 0);
+	--sidebar-foreground: oklch(0.85 0.02 0);
+	--sidebar-primary: oklch(0.5 0.12 195);
+	--sidebar-primary-foreground: oklch(0.15 0.02 0);
+	--sidebar-accent: oklch(0.22 0.04 195);
+	--sidebar-accent-foreground: oklch(0.85 0.0 0);
+	--sidebar-border: oklch(0.2 0.02 0);
+	--sidebar-ring: oklch(0.5 0.12 195);
 
-	--build-chat-colors-bg-1: oklch(0.15 0.02 200);
-	--build-chat-colors-bg-2: oklch(0.18 0.02 200);
-	--build-chat-colors-bg-3: oklch(0.22 0.02 200);
-	--build-chat-colors-bg-4: oklch(0.28 0.02 200);
-	--build-chat-colors-border-primary: rgba(255, 255, 255, 0.08);
-	--build-chat-colors-border-secondary: rgba(255, 255, 255, 0.06);
-	--build-chat-colors-border-tertiary: rgba(255, 255, 255, 0.04);
+	/* Build system mappings */
+	--build-chat-colors-bg-1: oklch(0.15 0.02 0);
+	--build-chat-colors-bg-2: oklch(0.18 0.02 0);
+	--build-chat-colors-bg-3: oklch(0.22 0.02 0);
+	--build-chat-colors-bg-4: oklch(0.28 0.02 0);
+	--build-chat-colors-border-primary: oklch(0.25 0.02 0);
+	--build-chat-colors-border-secondary: oklch(0.22 0.02 0);
+	--build-chat-colors-border-tertiary: oklch(0.2 0.02 0);
 	--build-chat-colors-danger: oklch(0.55 0.2 25);
 	--build-chat-colors-brand-heavy: oklch(0.55 0.12 195);
 	--build-chat-colors-brand-primary: oklch(0.5 0.12 195);
 	--build-chat-colors-brand-subtle: oklch(0.45 0.1 195);
-	--build-chat-colors-text-inverted: oklch(0.15 0.02 200);
-	--build-chat-colors-text-primary: oklch(0.95 0.02 200);
-	--build-chat-colors-text-secondary: oklch(0.85 0.02 200);
-	--build-chat-colors-text-tertiary: oklch(0.6 0.03 200);
+	--build-chat-colors-text-inverted: oklch(0.15 0.02 0);
+	--build-chat-colors-text-primary: oklch(0.95 0.02 0);
+	--build-chat-colors-text-secondary: oklch(0.85 0.02 0);
+	--build-chat-colors-text-tertiary: oklch(0.6 0.03 0);
 
 	/* Dark mode shadows */
 	--shadow-dialog:
 		0px 8px 24px 0px rgba(0, 0, 0, 0.25),
-		2px 3px 7px -1px rgba(0, 0, 0, 0.4),
-		0px 0px 0px 1px rgba(255, 255, 255, 0.04);
-	--shadow-elevation:
 		2px 3px 7px -1px rgba(0, 0, 0, 0.5),
-		0px 0px 0px 1px rgba(255, 255, 255, 0.04);
+		0px 0px 0px 1px oklch(0.25 0.02 0);
+	--shadow-elevation:
+		2px 3px 7px -1px rgba(0, 0, 0, 0.6),
+		0px 0px 0px 1px oklch(0.25 0.02 0);
 }
 
 @layer base {
@@ -225,11 +328,11 @@
 	}
   	body {
     	@apply bg-health-bg text-health-dark font-sans font-normal antialiased h-full;
-		background: #FFFFFF;
+		background: #ffffff;
 		min-height: 100vh;
 	}
 	.dark body {
-		background: oklch(0.15 0.02 200);
+		background: oklch(0.15 0.02 0);
 	}
 	h1, h2, h3, h4, h5, h6 {
 		@apply font-serif font-normal;
@@ -256,17 +359,17 @@
 		'Roboto Mono', 'JetBrains Mono', 'Fira Code', monospace;
 
 	--color-brand: oklch(0.5 0.12 195);
-	--color-text: oklch(0.2 0.04 200);
+	--color-text: oklch(0.2 0.04 0);
 	--color-text-on-brand: #fff;
 
-	/* VOITHER Shadows - exact spec */
+	/* VOITHER Shadows - exact spec @ 85% */
 	--shadow-dialog:
 		0px 8px 24px 0px rgba(121, 121, 121, 0.15),
-		2px 3px 7px -1px rgba(121, 121, 121, 0.8),
-		0px 0px 0px 1px rgba(240, 240, 240, 0.6);
+		2px 3px 7px -1px rgba(121, 121, 121, 0.85),
+		0px 0px 0px 1px #f0f0f0;
 	--shadow-elevation:
-		2px 3px 7px -1px rgba(121, 121, 121, 0.8),
-		0px 0px 0px 1px rgba(240, 240, 240, 0.5);
+		2px 3px 7px -1px rgba(121, 121, 121, 0.85),
+		0px 0px 0px 1px #f0f0f0;
 	--shadow-soft-layered:
 		1px 2px 4px -1px rgba(121, 121, 121, 0.4),
 		2px 3px 7px -1px rgba(121, 121, 121, 0.2);
@@ -294,23 +397,23 @@
 }
 
 /* VOITHER Component Styles
-   Shadow spec: 2px 3px 7px -1px rgba(121, 121, 121, 0.8)
-   #797979 = rgb(121, 121, 121) @ 80% opacity
+   Shadow spec: 2px 3px 7px -1px rgba(121, 121, 121, 0.85)
+   #797979 = rgb(121, 121, 121) @ 85% opacity
 */
 @layer components {
 	/* Card with VOITHER shadow */
 	.voither-card {
-		background: #FFFFFF;
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
+		background: #ffffff;
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.85);
 		@apply rounded-lg border border-[#f0f0f0] transition-all duration-200 ease-out;
 	}
 	.voither-card:hover {
-		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
+		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.85);
 	}
 
 	/* Soft card variant */
 	.voither-card-soft {
-		background: oklch(0.98 0.0 200);
+		background: oklch(0.98 0.0 0);
 		box-shadow: 1px 2px 4px -1px rgba(121, 121, 121, 0.4);
 		@apply rounded-lg border border-[#f0f0f0]/60 transition-all duration-200 ease-out;
 	}
@@ -322,19 +425,19 @@
 		@apply rounded-lg border border-[#f0f0f0] transition-all duration-200;
 	}
 	.voither-inset:focus-within {
-		background: #FFFFFF;
+		background: #ffffff;
 		box-shadow: 0 0 0 2px oklch(0.5 0.12 195 / 0.2);
 	}
 
 	/* Primary button */
 	.voither-btn {
 		background: oklch(0.5 0.12 195);
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.85);
 		@apply text-white font-sans tracking-wide transition-all duration-200 rounded-lg px-6 py-3 font-medium border-none cursor-pointer;
 	}
 	.voither-btn:hover {
 		background: oklch(0.45 0.12 195);
-		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
+		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.85);
 	}
 	.voither-btn:active {
 		transform: scale(0.98);
@@ -343,16 +446,16 @@
 
 	/* Secondary button */
 	.voither-btn-secondary {
-		background: #FFFFFF;
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
+		background: #ffffff;
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.85);
 		@apply text-health-dark font-sans tracking-wide transition-all duration-200 rounded-lg px-6 py-3 font-medium border border-[#f0f0f0] cursor-pointer;
 	}
 	.voither-btn-secondary:hover {
-		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
+		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.85);
 	}
 	.voither-btn-secondary:active {
 		transform: scale(0.98);
-		background: oklch(0.98 0.0 200);
+		background: oklch(0.98 0.0 0);
 	}
 
 	/* Ghost button */
@@ -360,18 +463,18 @@
 		@apply bg-transparent text-health-text-sub rounded-lg transition-all duration-200 border-none cursor-pointer;
 	}
 	.voither-btn-ghost:hover {
-		background: rgba(0,0,0,0.04);
+		background: oklch(0.92 0.0 0);
 		@apply text-health-dark;
 	}
 
 	/* Icon button */
 	.voither-icon-btn {
-		background: #FFFFFF;
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
+		background: #ffffff;
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.85);
 		@apply flex items-center justify-center rounded-lg text-health-dark transition-all duration-200 w-10 h-10 border border-[#f0f0f0] cursor-pointer;
 	}
 	.voither-icon-btn:hover {
-		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
+		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.85);
 	}
 	.voither-icon-btn:active {
 		transform: scale(0.96);
@@ -379,16 +482,16 @@
 
 	/* Legacy neumorphic classes - mapped to VOITHER */
 	.neu-card {
-		background: #FFFFFF;
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
+		background: #ffffff;
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.85);
 		@apply rounded-lg border border-[#f0f0f0] transition-all duration-200 ease-out;
 	}
 	.neu-card:hover {
-		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
+		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.85);
 	}
 
 	.neu-card-soft {
-		background: oklch(0.98 0.0 200);
+		background: oklch(0.98 0.0 0);
 		box-shadow: 1px 2px 4px -1px rgba(121, 121, 121, 0.4);
 		@apply rounded-lg border border-[#f0f0f0]/60 transition-all duration-200 ease-out;
 	}
@@ -399,13 +502,13 @@
 		@apply rounded-lg border border-[#f0f0f0] transition-all duration-200;
 	}
 	.neu-inset:focus-within {
-		background: #FFFFFF;
+		background: #ffffff;
 		box-shadow: 0 0 0 2px oklch(0.5 0.12 195 / 0.2);
 	}
 
 	.neu-btn {
 		background: oklch(0.5 0.12 195);
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.85);
 		@apply text-white font-sans tracking-wide transition-all duration-200 rounded-lg px-6 py-3 font-medium border-none cursor-pointer;
 	}
 	.neu-btn:hover {
@@ -416,12 +519,12 @@
 	}
 
 	.neu-btn-secondary {
-		background: #FFFFFF;
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
+		background: #ffffff;
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.85);
 		@apply text-health-dark font-sans tracking-wide transition-all duration-200 rounded-lg px-6 py-3 font-medium border border-[#f0f0f0] cursor-pointer;
 	}
 	.neu-btn-secondary:hover {
-		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
+		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.85);
 	}
 	.neu-btn-secondary:active {
 		transform: scale(0.98);
@@ -431,13 +534,13 @@
 		@apply bg-transparent text-health-text-sub rounded-lg transition-all duration-200 border-none cursor-pointer;
 	}
 	.neu-btn-ghost:hover {
-		background: rgba(0,0,0,0.04);
+		background: oklch(0.92 0.0 0);
 		@apply text-health-dark;
 	}
 
 	.neu-icon-btn {
-		background: #FFFFFF;
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
+		background: #ffffff;
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.85);
 		@apply flex items-center justify-center rounded-lg text-health-dark transition-all duration-200 w-10 h-10 border border-[#f0f0f0] cursor-pointer;
 	}
 	.neu-icon-btn:active {
@@ -462,21 +565,21 @@
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: rgba(121, 121, 121, 0.2);
+	background-color: oklch(0.5 0.05 0 / 0.3);
 	border-radius: 3px;
 	transition: background-color 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background-color: rgba(121, 121, 121, 0.3);
+	background-color: oklch(0.5 0.05 0 / 0.5);
 }
 
 .dark ::-webkit-scrollbar-thumb {
-	background-color: rgba(255, 255, 255, 0.15);
+	background-color: oklch(0.6 0.03 0 / 0.3);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-	background-color: rgba(255, 255, 255, 0.25);
+	background-color: oklch(0.6 0.03 0 / 0.5);
 }
 
 ::-webkit-scrollbar-corner {
@@ -489,29 +592,29 @@
 }
 
 .phase-timeline-scroll::-webkit-scrollbar-track {
-	background: rgba(0, 0, 0, 0.02);
+	background: oklch(0.92 0.0 0 / 0.5);
 	border-radius: 2px;
 }
 
 .phase-timeline-scroll::-webkit-scrollbar-thumb {
-	background: rgba(121, 121, 121, 0.2);
+	background: oklch(0.5 0.05 0 / 0.3);
 	border-radius: 2px;
 }
 
 .phase-timeline-scroll::-webkit-scrollbar-thumb:hover {
-	background: rgba(121, 121, 121, 0.3);
+	background: oklch(0.5 0.05 0 / 0.5);
 }
 
 .dark .phase-timeline-scroll::-webkit-scrollbar-track {
-	background: rgba(255, 255, 255, 0.02);
+	background: oklch(0.2 0.02 0 / 0.5);
 }
 
 .dark .phase-timeline-scroll::-webkit-scrollbar-thumb {
-	background: rgba(255, 255, 255, 0.15);
+	background: oklch(0.6 0.03 0 / 0.3);
 }
 
 .dark .phase-timeline-scroll::-webkit-scrollbar-thumb:hover {
-	background: rgba(255, 255, 255, 0.25);
+	background: oklch(0.6 0.03 0 / 0.5);
 }
 
 .a-tag a {
@@ -538,20 +641,20 @@
 }
 
 .chat-messages-scroll::-webkit-scrollbar-thumb {
-	background: rgba(121, 121, 121, 0.1);
+	background: oklch(0.5 0.05 0 / 0.15);
 	border-radius: 3px;
 }
 
 .chat-messages-scroll::-webkit-scrollbar-thumb:hover {
-	background: rgba(121, 121, 121, 0.15);
+	background: oklch(0.5 0.05 0 / 0.25);
 }
 
 .dark .chat-messages-scroll::-webkit-scrollbar-thumb {
-	background: rgba(255, 255, 255, 0.1);
+	background: oklch(0.6 0.03 0 / 0.15);
 }
 
 .dark .chat-messages-scroll::-webkit-scrollbar-thumb:hover {
-	background: rgba(255, 255, 255, 0.15);
+	background: oklch(0.6 0.03 0 / 0.25);
 }
 
 /* Terminal custom scrollbar */
@@ -560,30 +663,30 @@
 }
 
 .terminal-scroll::-webkit-scrollbar-track {
-	background: rgba(0, 0, 0, 0.02);
+	background: oklch(0.92 0.0 0 / 0.3);
 	border-radius: 3px;
 }
 
 .terminal-scroll::-webkit-scrollbar-thumb {
-	background: rgba(121, 121, 121, 0.15);
+	background: oklch(0.5 0.05 0 / 0.2);
 	border-radius: 3px;
 	transition: background-color 0.2s ease;
 }
 
 .terminal-scroll::-webkit-scrollbar-thumb:hover {
-	background: rgba(121, 121, 121, 0.25);
+	background: oklch(0.5 0.05 0 / 0.35);
 }
 
 .dark .terminal-scroll::-webkit-scrollbar-track {
-	background: rgba(255, 255, 255, 0.02);
+	background: oklch(0.2 0.02 0 / 0.3);
 }
 
 .dark .terminal-scroll::-webkit-scrollbar-thumb {
-	background: rgba(255, 255, 255, 0.12);
+	background: oklch(0.6 0.03 0 / 0.2);
 }
 
 .dark .terminal-scroll::-webkit-scrollbar-thumb:hover {
-	background: rgba(255, 255, 255, 0.2);
+	background: oklch(0.6 0.03 0 / 0.35);
 }
 
 /* Hide scrollbar but keep scroll behavior */
