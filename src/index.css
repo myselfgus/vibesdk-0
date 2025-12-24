@@ -9,7 +9,7 @@
 /* ========================================
    VOITHER Design System v1.0
    ----------------------------------------
-   Shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.85)
+   Shadow: 2px 3px 7px -1px #797979 @ 80%
    Radius: 0.75rem
    Fonts: Manrope, Josefin Sans, Roboto Mono
    Colors: OKLCH-based teal primary
@@ -109,13 +109,13 @@
 	--color-input: var(--input);
 	--color-ring: var(--ring);
 	
-	/* VOITHER Shadow - drastically reduced */
-	--shadow-voither: 2px 3px 7px -1px rgba(121, 121, 121, 0.85);
-	--shadow-voither-soft: 1px 2px 4px -1px rgba(121, 121, 121, 0.5);
-	--shadow-voither-hover: 2px 4px 10px -1px rgba(121, 121, 121, 0.7);
+	/* VOITHER Shadow - exact spec: 2px 3px 7px -1px #797979 @ 80% */
+	--shadow-voither: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
+	--shadow-voither-soft: 1px 2px 4px -1px rgba(121, 121, 121, 0.4);
+	--shadow-voither-hover: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
 	
 	--shadow-textarea:
-		2px 3px 7px -1px rgba(121, 121, 121, 0.15),
+		2px 3px 7px -1px rgba(121, 121, 121, 0.2),
 		0px 0px 0px 1px rgba(240, 240, 240, 0.8);
 	
 	--color-bg-1: var(--build-chat-colors-bg-1);
@@ -209,13 +209,13 @@
 	--build-chat-colors-text-secondary: oklch(0.85 0.02 200);
 	--build-chat-colors-text-tertiary: oklch(0.6 0.03 200);
 
-	/* Dark mode shadows - subtle */
+	/* Dark mode shadows */
 	--shadow-dialog:
 		0px 8px 24px 0px rgba(0, 0, 0, 0.25),
-		2px 2px 8px 0px rgba(0, 0, 0, 0.15),
+		2px 3px 7px -1px rgba(0, 0, 0, 0.4),
 		0px 0px 0px 1px rgba(255, 255, 255, 0.04);
 	--shadow-elevation:
-		2px 3px 7px -1px rgba(0, 0, 0, 0.4),
+		2px 3px 7px -1px rgba(0, 0, 0, 0.5),
 		0px 0px 0px 1px rgba(255, 255, 255, 0.04);
 }
 
@@ -259,17 +259,17 @@
 	--color-text: oklch(0.2 0.04 200);
 	--color-text-on-brand: #fff;
 
-	/* VOITHER Shadows - minimal, clean */
+	/* VOITHER Shadows - exact spec */
 	--shadow-dialog:
-		0px 8px 24px 0px rgba(121, 121, 121, 0.12),
-		2px 3px 7px -1px rgba(121, 121, 121, 0.08),
+		0px 8px 24px 0px rgba(121, 121, 121, 0.15),
+		2px 3px 7px -1px rgba(121, 121, 121, 0.8),
 		0px 0px 0px 1px rgba(240, 240, 240, 0.6);
 	--shadow-elevation:
-		2px 3px 7px -1px rgba(121, 121, 121, 0.15),
+		2px 3px 7px -1px rgba(121, 121, 121, 0.8),
 		0px 0px 0px 1px rgba(240, 240, 240, 0.5);
 	--shadow-soft-layered:
-		1px 2px 4px -1px rgba(121, 121, 121, 0.1),
-		2px 3px 7px -1px rgba(121, 121, 121, 0.08);
+		1px 2px 4px -1px rgba(121, 121, 121, 0.4),
+		2px 3px 7px -1px rgba(121, 121, 121, 0.2);
 }
 
 /* VOITHER Design System Keyframes */
@@ -293,29 +293,32 @@
 	50% { transform: translateY(-4px); }
 }
 
-/* VOITHER Component Styles - Clean, minimal shadows */
+/* VOITHER Component Styles
+   Shadow spec: 2px 3px 7px -1px rgba(121, 121, 121, 0.8)
+   #797979 = rgb(121, 121, 121) @ 80% opacity
+*/
 @layer components {
 	/* Card with VOITHER shadow */
 	.voither-card {
 		background: #FFFFFF;
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.15);
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
 		@apply rounded-lg border border-[#f0f0f0] transition-all duration-200 ease-out;
 	}
 	.voither-card:hover {
-		box-shadow: 2px 4px 10px -1px rgba(121, 121, 121, 0.2);
+		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
 	}
 
 	/* Soft card variant */
 	.voither-card-soft {
 		background: oklch(0.98 0.0 200);
-		box-shadow: 1px 2px 4px -1px rgba(121, 121, 121, 0.1);
+		box-shadow: 1px 2px 4px -1px rgba(121, 121, 121, 0.4);
 		@apply rounded-lg border border-[#f0f0f0]/60 transition-all duration-200 ease-out;
 	}
 
 	/* Inset/input style */
 	.voither-inset {
 		background: oklch(0.94 0.03 200);
-		box-shadow: inset 1px 1px 3px rgba(121, 121, 121, 0.08);
+		box-shadow: inset 1px 1px 3px rgba(121, 121, 121, 0.15);
 		@apply rounded-lg border border-[#f0f0f0] transition-all duration-200;
 	}
 	.voither-inset:focus-within {
@@ -326,26 +329,26 @@
 	/* Primary button */
 	.voither-btn {
 		background: oklch(0.5 0.12 195);
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.25);
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
 		@apply text-white font-sans tracking-wide transition-all duration-200 rounded-lg px-6 py-3 font-medium border-none cursor-pointer;
 	}
 	.voither-btn:hover {
 		background: oklch(0.45 0.12 195);
-		box-shadow: 2px 4px 10px -1px rgba(121, 121, 121, 0.3);
+		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
 	}
 	.voither-btn:active {
 		transform: scale(0.98);
-		box-shadow: 1px 2px 4px -1px rgba(121, 121, 121, 0.2);
+		box-shadow: 1px 2px 4px -1px rgba(121, 121, 121, 0.6);
 	}
 
 	/* Secondary button */
 	.voither-btn-secondary {
 		background: #FFFFFF;
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.1);
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
 		@apply text-health-dark font-sans tracking-wide transition-all duration-200 rounded-lg px-6 py-3 font-medium border border-[#f0f0f0] cursor-pointer;
 	}
 	.voither-btn-secondary:hover {
-		box-shadow: 2px 4px 10px -1px rgba(121, 121, 121, 0.15);
+		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
 	}
 	.voither-btn-secondary:active {
 		transform: scale(0.98);
@@ -364,35 +367,35 @@
 	/* Icon button */
 	.voither-icon-btn {
 		background: #FFFFFF;
-		box-shadow: 1px 2px 4px -1px rgba(121, 121, 121, 0.12);
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
 		@apply flex items-center justify-center rounded-lg text-health-dark transition-all duration-200 w-10 h-10 border border-[#f0f0f0] cursor-pointer;
 	}
 	.voither-icon-btn:hover {
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.15);
+		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
 	}
 	.voither-icon-btn:active {
 		transform: scale(0.96);
 	}
 
-	/* Legacy neumorphic classes - updated to VOITHER */
+	/* Legacy neumorphic classes - mapped to VOITHER */
 	.neu-card {
 		background: #FFFFFF;
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.15);
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
 		@apply rounded-lg border border-[#f0f0f0] transition-all duration-200 ease-out;
 	}
 	.neu-card:hover {
-		box-shadow: 2px 4px 10px -1px rgba(121, 121, 121, 0.2);
+		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
 	}
 
 	.neu-card-soft {
 		background: oklch(0.98 0.0 200);
-		box-shadow: 1px 2px 4px -1px rgba(121, 121, 121, 0.1);
+		box-shadow: 1px 2px 4px -1px rgba(121, 121, 121, 0.4);
 		@apply rounded-lg border border-[#f0f0f0]/60 transition-all duration-200 ease-out;
 	}
 
 	.neu-inset {
 		background: oklch(0.94 0.03 200);
-		box-shadow: inset 1px 1px 3px rgba(121, 121, 121, 0.08);
+		box-shadow: inset 1px 1px 3px rgba(121, 121, 121, 0.15);
 		@apply rounded-lg border border-[#f0f0f0] transition-all duration-200;
 	}
 	.neu-inset:focus-within {
@@ -402,7 +405,7 @@
 
 	.neu-btn {
 		background: oklch(0.5 0.12 195);
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.25);
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
 		@apply text-white font-sans tracking-wide transition-all duration-200 rounded-lg px-6 py-3 font-medium border-none cursor-pointer;
 	}
 	.neu-btn:hover {
@@ -414,11 +417,11 @@
 
 	.neu-btn-secondary {
 		background: #FFFFFF;
-		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.1);
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
 		@apply text-health-dark font-sans tracking-wide transition-all duration-200 rounded-lg px-6 py-3 font-medium border border-[#f0f0f0] cursor-pointer;
 	}
 	.neu-btn-secondary:hover {
-		box-shadow: 2px 4px 10px -1px rgba(121, 121, 121, 0.15);
+		box-shadow: 3px 4px 8px -1px rgba(121, 121, 121, 0.8);
 	}
 	.neu-btn-secondary:active {
 		transform: scale(0.98);
@@ -434,7 +437,7 @@
 
 	.neu-icon-btn {
 		background: #FFFFFF;
-		box-shadow: 1px 2px 4px -1px rgba(121, 121, 121, 0.12);
+		box-shadow: 2px 3px 7px -1px rgba(121, 121, 121, 0.8);
 		@apply flex items-center justify-center rounded-lg text-health-dark transition-all duration-200 w-10 h-10 border border-[#f0f0f0] cursor-pointer;
 	}
 	.neu-icon-btn:active {
