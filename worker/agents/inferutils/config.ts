@@ -9,7 +9,7 @@ import {
 } from "./config.types";
 import { env } from 'cloudflare:workers';
 
-// Common configs - these are good defaults
+// Common configs - ALL FEATURES ENABLED
 const COMMON_AGENT_CONFIGS = {
     templateSelection: {
         name: AIModels.GEMINI_2_5_FLASH_LITE,
@@ -17,23 +17,26 @@ const COMMON_AGENT_CONFIGS = {
         fallbackModel: AIModels.GEMINI_2_5_FLASH,
         temperature: 0.6,
     },
+    // ENABLED - Screenshot Analysis with Claude 4.5 Sonnet
     screenshotAnalysis: {
-        name: AIModels.DISABLED,
+        name: AIModels.CLAUDE_4_5_SONNET,
         reasoning_effort: 'medium' as const,
         max_tokens: 8000,
         temperature: 1,
         fallbackModel: AIModels.GEMINI_2_5_FLASH,
     },
+    // ENABLED - Realtime Code Fixer with Claude 4.5 Haiku
     realtimeCodeFixer: {
-        name: AIModels.DISABLED,
+        name: AIModels.CLAUDE_4_5_HAIKU,
         reasoning_effort: 'low' as const,
         max_tokens: 32000,
         temperature: 1,
         fallbackModel: AIModels.GEMINI_2_5_FLASH,
     },
+    // ENABLED - Fast Code Fixer with Grok 4 Fast
     fastCodeFixer: {
-        name: AIModels.DISABLED,
-        reasoning_effort: undefined,
+        name: AIModels.GROK_4_FAST,
+        reasoning_effort: 'low' as const,
         max_tokens: 64000,
         temperature: 0.0,
         fallbackModel: AIModels.GEMINI_2_5_PRO,
@@ -48,20 +51,15 @@ const SHARED_IMPLEMENTATION_CONFIG = {
 };
 
 //======================================================================================
-// ATTENTION! Platform config requires specific API keys and Cloudflare AI Gateway setup.
+// PLATFORM CONFIG - All providers enabled (Google, Anthropic, OpenAI, Grok, Vertex)
 //======================================================================================
-/* 
-These are the configs used at build.cloudflare.dev 
-You may need to provide API keys for these models in your environment or use 
-Cloudflare AI Gateway unified billing for seamless model access without managing multiple keys.
-*/
 const PLATFORM_AGENT_CONFIG: AgentConfig = {
     ...COMMON_AGENT_CONFIGS,
     blueprint: {
         name: AIModels.OPENAI_5_MINI,
         reasoning_effort: 'medium',
         max_tokens: 32000,
-        fallbackModel: AIModels.GEMINI_2_5_FLASH,
+        fallbackModel: AIModels.CLAUDE_4_5_SONNET,
         temperature: 1.0,
     },
     projectSetup: {
@@ -69,7 +67,7 @@ const PLATFORM_AGENT_CONFIG: AgentConfig = {
         reasoning_effort: 'medium',
         max_tokens: 8000,
         temperature: 1,
-        fallbackModel: AIModels.GEMINI_2_5_PRO,
+        fallbackModel: AIModels.CLAUDE_4_5_SONNET,
     },
     phaseGeneration: {
         name: AIModels.GROK_4_FAST,
@@ -79,85 +77,90 @@ const PLATFORM_AGENT_CONFIG: AgentConfig = {
         fallbackModel: AIModels.OPENAI_5_MINI,
     },
     firstPhaseImplementation: {
-        name: AIModels.GEMINI_2_5_PRO,
+        name: AIModels.CLAUDE_4_5_SONNET,
         ...SHARED_IMPLEMENTATION_CONFIG,
+        fallbackModel: AIModels.GEMINI_2_5_PRO,
     },
     phaseImplementation: {
         name: AIModels.GEMINI_2_5_PRO,
         ...SHARED_IMPLEMENTATION_CONFIG,
+        fallbackModel: AIModels.CLAUDE_4_5_SONNET,
     },
     conversationalResponse: {
         name: AIModels.GROK_4_FAST,
         reasoning_effort: 'low',
         max_tokens: 4000,
         temperature: 1,
-        fallbackModel: AIModels.GEMINI_2_5_FLASH,
+        fallbackModel: AIModels.CLAUDE_4_5_HAIKU,
     },
     deepDebugger: {
-        name: AIModels.OPENAI_5_MINI,
+        name: AIModels.CLAUDE_4_5_SONNET,
         reasoning_effort: 'high',
         max_tokens: 8000,
         temperature: 1,
-        fallbackModel: AIModels.GEMINI_2_5_FLASH,
+        fallbackModel: AIModels.OPENAI_5_MINI,
     },
     fileRegeneration: {
         name: AIModels.OPENAI_5_MINI,
         reasoning_effort: 'medium',
         max_tokens: 16000,
         temperature: 1,
-        fallbackModel: AIModels.GROK_CODE_FAST_1,
+        fallbackModel: AIModels.CLAUDE_4_5_HAIKU,
     },
 };
 
 //======================================================================================
-// Default Gemini-only config (most likely used in your deployment)
+// DEFAULT CONFIG - Gemini + Anthropic fallbacks
 //======================================================================================
-/* These are the default out-of-the box gemini-only models used when PLATFORM_MODEL_PROVIDERS is not set */
 const DEFAULT_AGENT_CONFIG: AgentConfig = {
     ...COMMON_AGENT_CONFIGS,
     blueprint: {
         name: AIModels.GEMINI_2_5_PRO,
         reasoning_effort: 'medium',
         max_tokens: 64000,
-        fallbackModel: AIModels.GEMINI_2_5_FLASH,
+        fallbackModel: AIModels.CLAUDE_4_5_SONNET,
         temperature: 0.7,
     },
     projectSetup: {
         name: AIModels.GEMINI_2_5_PRO,
         ...SHARED_IMPLEMENTATION_CONFIG,
+        fallbackModel: AIModels.CLAUDE_4_5_SONNET,
     },
     phaseGeneration: {
         name: AIModels.GEMINI_2_5_PRO,
         ...SHARED_IMPLEMENTATION_CONFIG,
+        fallbackModel: AIModels.CLAUDE_4_5_SONNET,
     },
     firstPhaseImplementation: {
         name: AIModels.GEMINI_2_5_PRO,
         ...SHARED_IMPLEMENTATION_CONFIG,
+        fallbackModel: AIModels.CLAUDE_4_5_SONNET,
     },
     phaseImplementation: {
         name: AIModels.GEMINI_2_5_PRO,
         ...SHARED_IMPLEMENTATION_CONFIG,
+        fallbackModel: AIModels.CLAUDE_4_5_SONNET,
     },
     conversationalResponse: {
         name: AIModels.GEMINI_2_5_FLASH,
         reasoning_effort: 'low',
         max_tokens: 4000,
         temperature: 0,
-        fallbackModel: AIModels.GEMINI_2_5_PRO,
+        fallbackModel: AIModels.CLAUDE_4_5_HAIKU,
     },
     deepDebugger: {
         name: AIModels.GEMINI_2_5_PRO,
         reasoning_effort: 'high',
         max_tokens: 8000,
         temperature: 0.5,
-        fallbackModel: AIModels.GEMINI_2_5_FLASH,
+        fallbackModel: AIModels.CLAUDE_4_5_SONNET,
     },
     fileRegeneration: {
         name: AIModels.GEMINI_2_5_PRO,
         reasoning_effort: 'low',
         max_tokens: 32000,
         temperature: 0,
-        fallbackModel: AIModels.GEMINI_2_5_FLASH,
+        fallbackModel: AIModels.CLAUDE_4_5_HAIKU,
     },
 };
 
@@ -166,13 +169,18 @@ export const AGENT_CONFIG: AgentConfig = env.PLATFORM_MODEL_PROVIDERS
     : DEFAULT_AGENT_CONFIG;
 
 
+// ALL AGENT CONSTRAINTS - ALL MODELS ALLOWED
 export const AGENT_CONSTRAINTS: Map<AgentActionKey, AgentConstraintConfig> = new Map([
 	['fastCodeFixer', {
-		allowedModels: new Set([AIModels.DISABLED]),
+		allowedModels: new Set(AllModels),
 		enabled: true,
 	}],
 	['realtimeCodeFixer', {
-		allowedModels: new Set([AIModels.DISABLED]),
+		allowedModels: new Set(AllModels),
+		enabled: true,
+	}],
+	['screenshotAnalysis', {
+		allowedModels: new Set(AllModels),
 		enabled: true,
 	}],
 	['fileRegeneration', {
@@ -184,15 +192,31 @@ export const AGENT_CONSTRAINTS: Map<AgentActionKey, AgentConstraintConfig> = new
 		enabled: true,
 	}],
 	['projectSetup', {
-		allowedModels: new Set([...RegularModels, AIModels.GEMINI_2_5_PRO]),
+		allowedModels: new Set(AllModels),
 		enabled: true,
 	}],
 	['conversationalResponse', {
-		allowedModels: new Set(RegularModels),
+		allowedModels: new Set(AllModels),
 		enabled: true,
 	}],
 	['templateSelection', {
-		allowedModels: new Set(LiteModels),
+		allowedModels: new Set(AllModels),
+		enabled: true,
+	}],
+	['blueprint', {
+		allowedModels: new Set(AllModels),
+		enabled: true,
+	}],
+	['firstPhaseImplementation', {
+		allowedModels: new Set(AllModels),
+		enabled: true,
+	}],
+	['phaseImplementation', {
+		allowedModels: new Set(AllModels),
+		enabled: true,
+	}],
+	['deepDebugger', {
+		allowedModels: new Set(AllModels),
 		enabled: true,
 	}],
 ]);
